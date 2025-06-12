@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div id="layout">
+        <nav>
+            <h2>Our Memories</h2>
+            <div>
+                <h3>Memories</h3>
+                <h3>Add Memories</h3>
+            </div>
+        </nav>
+        <main id="main">
+            <div id="memoryDiv">
+                <div class="memory">
+                        <div class="textDiv" id="r"><select name="author" id="author" hidden>
+                                <option value="Augusto">Augusto</option>
+                                <option value="Malu">Malu</option>
+                            </select></select></div>
+                        <div id="imgDiv">
+                            <div id="drop-area">
+                                <img id="preview-img" alt="Preview" />
+                                <p>Drag & drop or click to upload</p>
+                            </div>
+                            <input type="file" id="input-file" name="file" accept="image/*" />
+                        </div>
+                        <div class="textDiv">
+                            <div>
+                                <h3><input type="text" name="title" placeholder="Título"></h3>
+                            </div>
+                            <div>
+                                <p><input type="date" name="data" placeholder="Data"></p>
+                            </div>
+
+                        </div>
+                        <div class="description">
+                            <p><textarea name="description" id="description cols="44" rows="5"></textarea></p>
+                        </div>
+                        <div class="textDiv">
+                            <button type="submit" id="addButton">Adicionar Memória</button>
+                        </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js" defer></script>
+<script src="uploadimg.js" type="module" defer></script>
+<script src="form.js" type="module" defer></script>
+
+</html>
