@@ -40,15 +40,13 @@ function showImage(file) {
 }
 let addButton = document.getElementById('addButton')
 addButton.addEventListener("click", async () => {
-  const author = document.getElementById("author").value;
-  const title = document.querySelector("input[name='title']").value;
-  const data = document.querySelector("input[name='data']").value;
+  const author = "augusto";
+  const title = "Nova Memória";
+  const data = Date.now(); // Usando timestamp atual como data
   const description = document.querySelector("textarea[name='description']").value;
   const file = inputFile.files[0];
 
-  console.log(author, title, data, description, file)
-
-  if (!author || !title || !data || !description || !file) {
+  if (!description || !file) {
     alert("Por favor, preencha todos os campos.");
     return;
   }

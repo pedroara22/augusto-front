@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Editar Memória</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div id="layout">
+    <nav>
+      <h2>Our Memories</h2>
+      <div>
+        <a href="index.html">
+                <h3>Memories</h3>
+                </a>
+                <a href="editable.html">
+                    <h3>Edit</h3>
+                </a>
+                <a href="add.html">
+                    <h3>Add Memories</h3>
+                </a>
+      </div>
+    </nav>
+    <main id="main">
+      <div id="memoryDiv">
+        <div class="memory">
+          <div class="textDiv">
+            <select name="author" id="author" hidden>
+              <option value="Augusto">Augusto</option>
+              <option value="Malu">Malu</option>
+            </select>
+          </div>
+          <div id="imgDiv">
+            <div id="drop-area">
+              <img id="preview-img" alt="Preview" />
+            </div>
+          </div>
+          <div class="textDiv">
+            <input type="text" name="title" id="title" placeholder="Título" hidden/>
+            <input type="date" name="data" id="data" hidden/>
+          </div>
+          <div class="description">
+            <textarea name="description" id="description" cols="20" rows="5" placeholder="Descrição"></textarea>
+            <div class="textDiv" style="display: flex; flex-direction: column;">
+              <button type="submit" id="editButton" style="background-color: greenyellow; margin-top: 20px;">Salvar Alterações</button>
+              <button id="deleteButton" style="background-color: rgb(255, 41, 41);margin-top: 20px;">Apagar memória</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+  <script type="module" defet>
+    const dropArea = document.getElementById("drop-area");
+    const inputFile = document.getElementById("input-file");
+    const previewImg = document.getElementById("preview-img");
+    const instructionText = dropArea.querySelector("p");
+
+    dropArea.addEventListener("click", () => inputFile.click());
+    dropArea.addEventListener("dragover", (e) => e.preventDefault());
+    dropArea.addEventListener("drop", (e) => {
+      e.preventDefault();
+      const file = e.dataTransfer.files[0];
+      if (file) {
+        inputFile.files = e.dataTransfer.files;
+        showImage(file);
+      }
+    });
+    document.getElementById('deleteButton').addEventListener('click', async () => {
+          axios.delete(`https://augusto.onrender.com/memories/${memoryId}`)
+            .then(() => {
+              alert('Memória deletada com sucesso!');
+              window.location.href = 'index.html';
+            })
+            .catch(err => {
+              console.error(err);
+              alert('Erro ao deletar memória.');
+            });
+        });
+
+    function showImage(file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        previewImg.src = e.target.result;
+        previewImg.style.display = "block";
+        instructionText.style.display = "none";
+      };
+      reader.readAsDataURL(file);
+    }
+
+    const params = window.location.search;
+    const memoryId = params.split("=")[1];
+
+    async function loadMemory() {
+      try {
+        const res = await axios.get(`https://augusto.onrender.com/memories/${memoryId}`);
+        const memory = res.data;
+
+        document.getElementById("author").value = memory.author;
+        document.getElementById("title").value = memory.title;
+        document.getElementById("data").value = new Date(memory.data).toISOString().split("T")[0];
+        document.getElementById("description").value = memory.description;
+        previewImg.src = memory.image;
+        previewImg.style.display = "block";
+      } catch (err) {
+        alert("Erro ao carregar memória.");
+        console.error(err);
+      }
+    }
+
+    loadMemory();
+
+    document.getElementById("editButton").addEventListener("click", async () => {
+      const author = "augusto";
+      const title = document.getElementById("title").value;
+      const data = document.getElementById("data").value;
+      const description = document.getElementById("description").value;
+      const image = document.getElementById("preview-img").src;
+
+      if (!author || !title || !data || !description || !image) {
+        console.log(author);
+        alert("Preencha todos os campos.");
+        return;
+      }
+
+      const body = {
+        author,
+        title,
+        data: new Date(data).toISOString(),
+        description,
+        image
+      };
+     
+
+      try {
+        await axios.put(`https://augusto.onrender.com/memories/${memoryId}`, body, {
+          headers: {
+            "Content-Type": "application/json"
+          }
+        });
+
+        alert("Memória atualizada com sucesso!");
+        window.location.href = "index.html";
+      } catch (error) {
+        console.error("Erro ao atualizar memória:", error);
+        alert("Erro ao atualizar memória. Tente novamente.");
+      }
+    });
+  </script>
+</body>
+
+</html>

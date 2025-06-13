@@ -14,8 +14,15 @@
         <nav>
             <h2>Our Memories</h2>
             <div>
+                <a href="index.html">
                 <h3>Memories</h3>
-                <h3>Add Memories</h3>
+                </a>
+                <a href="editable.html">
+                    <h3>Edit</h3>
+                </a>
+                <a href="add.html">
+                    <h3>Add Memories</h3>
+                </a>
             </div>
         </nav>
         <main id="main">
@@ -34,18 +41,18 @@
                         </div>
                         <div class="textDiv">
                             <div>
-                                <h3><input type="text" name="title" placeholder="Título"></h3>
+                                <h3><input type="text" name="title" placeholder="Título" hidden></h3>
                             </div>
                             <div>
-                                <p><input type="date" name="data" placeholder="Data"></p>
+                                <p><input type="date" name="data" placeholder="Data" hidden></p>
                             </div>
 
                         </div>
                         <div class="description">
-                            <p><textarea name="description" id="description cols="44" rows="5"></textarea></p>
-                        </div>
-                        <div class="textDiv">
-                            <button type="submit" id="addButton">Adicionar Memória</button>
+                            <p><textarea name="description" id="description cols="20" rows="5"></textarea></p>
+                            <div class="textDiv">
+                                <button type="submit" id="addButton">Adicionar Memória</button>
+                            </div>
                         </div>
                 </div>
             </div>

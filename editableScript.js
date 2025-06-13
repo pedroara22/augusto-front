@@ -13,6 +13,7 @@ const loadMemories = () => {
                                     </div>
                                     <div class="description">
                                         <p>${element.description}</p>
+                                        <a href="edit.html?=${element._id}" style="color:blue;" target="_blank" class="link">Editar</a>
                                     </div>
                                 </div>
                             </div>

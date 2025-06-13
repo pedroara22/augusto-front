@@ -1,6 +1,6 @@
 #drop-area {
-    width: 342px;
-    height: 342px;
+    width: 200px;
+    height: 200px;
     background-color: #fff;
     display: flex;
     flex-direction: column;
@@ -11,6 +11,10 @@
     transition: background 0.3s;
     position: relative;
     overflow: hidden;
+}
+#preview-img{
+    object-fit: cover;
+    width: 200px;
 }
 
 #drop-area:hover {
@@ -32,17 +36,36 @@
 #input-file {
     display: none;
 }
-input[type="text"], textarea, select{
-    background: #f9f9f9;
-    border: #555;
+textarea{
+    border: #000000;
     padding: 5px;
     border-radius: 5px;
-}
-textarea {
-    min-width: 330px;
-    height: 60px;
+    width: 210px;
+    min-width: 210px;
+    font-size: 14px;
+    color: white;
     resize: none;
+    background: none;
+    border: 1px solid #ffffff;
+    overflow-x: hidden;
+    margin-top: 10px;
+    text-align: justify;
+    font-weight: bold;
 }
+text
 input[type="text"] {
     font-weight: bold;
+}
+button{
+    background-color: #dfdfdf; /* Green */
+    border: none;
+    color: rgb(0, 0, 0);
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 210px;
 }
